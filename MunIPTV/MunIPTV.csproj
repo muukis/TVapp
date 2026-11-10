@@ -22,7 +22,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundScale="0.65" Color="#0F1419" />
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#0F1419" BaseSize="128,128" />
 		<MauiImage Include="Resources\Images\*" />
-		<!-- Bundled default playlist (same file as ../playlists/index.country.m3u). -->
+		<!-- Bundled default playlist (same file as TVapp/playlists/index.country.m3u). -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 

@@ -4,12 +4,12 @@ A Samsung Smart TV app built with Tizen Studio that streams live IPTV channels f
 
 ## Demo
 
-[![Watch the demo](images/thumbnail.png)](https://www.youtube.com/watch?v=Uj-7Cc0Xxqk)
+[![Watch the demo](TVapp/images/thumbnail.png)](https://www.youtube.com/watch?v=Uj-7Cc0Xxqk)
 
 ## Features
 
 - **Multiple playlists, multiple active at once** — add any number of M3U/M3U8 playlist URLs in Settings, and toggle each one active/inactive independently with a checkbox. Categories from different active playlists are kept visually separate (grouped under a header per playlist) rather than merged together.
-- **Built-in default playlist** — ships with the IPTV-ORG country-indexed catalog bundled locally (`playlists/index.country.m3u`), so channels are available even when the device has no route to an external host. A one-tap **"+ Add IPTV-ORG Open Channels"** button in Settings adds the live version of the same catalog fetched from `iptv-org.github.io`.
+- **Built-in default playlist** — ships with the IPTV-ORG country-indexed catalog bundled locally (`TVapp/playlists/index.country.m3u`), so channels are available even when the device has no route to an external host. A one-tap **"+ Add IPTV-ORG Open Channels"** button in Settings adds the live version of the same catalog fetched from `iptv-org.github.io`.
 - **Categories & channel browsing** — channels are grouped by `group-title` into an alphabetical, two-column category list, then into a channel grid per category.
 - **Favorites** — star any channel while watching it. Favorites persist independently of which playlists are active, but are only *shown* while their source playlist is active (deactivating a playlist hides its favorites without deleting them; deleting the playlist removes them for good).
 - **Remote-control navigation** — a custom focus-zone system drives all navigation via D-pad (arrow keys + Enter/OK) and the remote's Back key; no mouse/pointer required. Includes Channel Up/Down zapping and Play/Pause from the remote.
@@ -25,20 +25,27 @@ A Samsung Smart TV app built with Tizen Studio that streams live IPTV channels f
 ## Project structure
 
 ```
-config.xml           Tizen widget manifest (app id, privileges, profile)
-index.html            App shell — all screens as <section> elements
-css/style.css         All styling (focus states, layout, screens)
-js/main.js            App logic: Focus/navigation, playlists, playback, favorites
-playlists/            Bundled default M3U playlist (offline fallback)
-images/               App art: donate banner, donate QR code, icons
-icon.png              App icon
-noun-live-tv-3548799.png   Widget icon referenced by config.xml
-TVapp.wgt             Pre-built, signed package ready to sideload
+TVapp/               Samsung Tizen TV app (everything below lives in this folder)
+  config.xml           Tizen widget manifest (app id, privileges, profile)
+  index.html            App shell — all screens as <section> elements
+  css/style.css         All styling (focus states, layout, screens)
+  js/main.js            App logic: Focus/navigation, playlists, playback, favorites
+  playlists/            Bundled default M3U playlist (offline fallback)
+  images/               App art: donate banner, donate QR code, icons
+  icon.png              App icon
+  noun-live-tv-3548799.png   Widget icon referenced by config.xml
+  TVapp.wgt             Pre-built, signed package ready to sideload
 ```
 
 ## Building
 
-From the project root:
+From the `TVapp/` folder (so the Android sources in `MunIPTV/` are not packaged):
+
+```bash
+cd TVapp
+```
+
+Then:
 
 ```bash
 # 1. Compile the web content into .buildResult/
