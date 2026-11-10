@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MunIPTV.Pages.SupportPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Support">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16" HorizontalOptions="Center" MaximumWidthRequest="480">
+            <Label Text="Support the developer" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Border BackgroundColor="White" StrokeThickness="0" Padding="12" HorizontalOptions="Center">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Image Source="donate_qr.png" WidthRequest="220" HeightRequest="220" />
+            </Border>
+            <Button Text="Open donation page" Clicked="OnOpen" BackgroundColor="{StaticResource Accent}" />
+            <Label Text="donate.stripe.com/8x2eVef1M8vR58513Ebwk01" FontSize="12" HorizontalOptions="Center"
+                   TextColor="{StaticResource TextMuted}" />
+            <Label HorizontalTextAlignment="Center" TextColor="{StaticResource TextMuted}"
+                   Text="Scan with another phone, or open the link, to leave a tip via Stripe — it starts at $1, but you can change it to whatever amount you'd like. Totally optional — thank you for using the app either way!" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

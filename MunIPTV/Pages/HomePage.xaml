@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MunIPTV.Pages.HomePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MunIPTV.Models"
+             Title="MunIPTV">
+    <Grid RowDefinitions="200,Auto,*">
+        <Grid BackgroundColor="{StaticResource Surface}">
+            <Image x:Name="HeroImage" Aspect="AspectFit" Opacity="0.25" Margin="24" />
+            <VerticalStackLayout VerticalOptions="End" Padding="16" Spacing="4">
+                <Border BackgroundColor="{StaticResource Danger}" StrokeThickness="0" HorizontalOptions="Start" Padding="8,2">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="4" /></Border.StrokeShape>
+                    <Label Text="LIVE" FontSize="12" FontAttributes="Bold" />
+                </Border>
+                <Label x:Name="HeroTitle" FontSize="28" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                <Label x:Name="HeroSubtitle" TextColor="{StaticResource TextMuted}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Label Grid.Row="1" Text="Favorites" Style="{StaticResource PageTitle}" FontSize="20" />
+
+        <CollectionView x:Name="FavoritesList" Grid.Row="2" SelectionMode="Single"
+                        SelectionChanged="OnFavoriteSelected" Margin="10,0">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.EmptyView>
+                <Label Margin="8" TextColor="{StaticResource TextMuted}"
+                       Text="No favorites yet — tap ☆ while watching a channel" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Channel">
+                    <Border Margin="6" Padding="0" BackgroundColor="{StaticResource Surface}" StrokeThickness="0">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+                        <Grid RowDefinitions="90,Auto">
+                            <Image Source="{Binding Logo}" IsVisible="{Binding HasLogo}" Aspect="AspectFit" Margin="12" />
+                            <Label Text="{Binding Initial}" IsVisible="{Binding NoLogo}" FontSize="36" FontAttributes="Bold"
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource TextMuted}" />
+                            <Label Grid.Row="1" Text="{Binding Name}" MaxLines="2" LineBreakMode="TailTruncation" Margin="10,0,10,10" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator x:Name="Busy" Grid.Row="2" IsRunning="False" IsVisible="False"
+                           Color="{StaticResource Accent}" VerticalOptions="Center" HorizontalOptions="Center" />
+    </Grid>
+</ContentPage>

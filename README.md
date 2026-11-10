@@ -62,6 +62,30 @@ tizen install -n TVapp.wgt -t <device-id> -- .buildResult
 
 Alternatively, sideload the pre-built `TVapp.wgt` in this repo directly without building anything yourself.
 
+## MunIPTV — Android (.NET MAUI) version
+
+`MunIPTV.sln` / `MunIPTV/` is a native Android port of this app built with **.NET 10 MAUI** (`net10.0-android` only — no iOS, Windows or Mac targets). It has the same feature set as the Tizen app: multiple simultaneously-active M3U/M3U8 playlists (add / edit / delete / toggle), the bundled IPTV-ORG default playlist plus the one-tap live "Open Channels" playlist, categories grouped per playlist, channel grid, favorites, HLS playback with channel prev/next, and the Support screen.
+
+Differences from the Tizen build: it is touch-first (system keyboard instead of the on-screen D-pad keyboard, native back button), and playback uses ExoPlayer (Media3) through `CommunityToolkit.Maui.MediaElement` instead of hls.js.
+
+```
+MunIPTV/Models/      Playlist, Channel, Category
+MunIPTV/Services/    M3UParser, PlaylistService (playlists, favorites, storage), helpers
+MunIPTV/Pages/       Home, Categories, Channels, Settings, Support, Player
+MunIPTV/Resources/   App icon, splash, donate QR, bundled index.country.m3u
+MunIPTV/Platforms/Android/   Manifest (INTERNET, cleartext allowed), MainActivity
+```
+
+Requirements: .NET 10 SDK with the MAUI Android workload (`dotnet workload install maui-android`), and the Android SDK (API 36 platform).
+
+```bash
+dotnet build MunIPTV/MunIPTV.csproj -f net10.0-android
+dotnet build MunIPTV/MunIPTV.csproj -f net10.0-android -t:Run     # deploy to a connected device/emulator
+dotnet publish MunIPTV/MunIPTV.csproj -f net10.0-android -c Release   # release APK/AAB
+```
+
+Or open `MunIPTV.sln` in Visual Studio 2026 / VS Code with the .NET MAUI extension.
+
 ## Notes on network dependence
 
 Only the app shell and the bundled default playlist are guaranteed to work fully offline. Any playlist fetched from an external URL (including the IPTV-ORG "open channels" quick-add) requires network access from the TV/emulator; loads that hang are aborted after 15 seconds with an error toast rather than blocking the UI indefinitely.

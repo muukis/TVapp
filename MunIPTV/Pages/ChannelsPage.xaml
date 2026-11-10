@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MunIPTV.Pages.ChannelsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MunIPTV.Models"
+             Title="Channels">
+    <CollectionView x:Name="List" SelectionMode="Single" SelectionChanged="OnSelected" Margin="10,8">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="2" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Channel">
+                <Border Margin="6" Padding="0" BackgroundColor="{StaticResource Surface}" StrokeThickness="0">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+                    <Grid RowDefinitions="90,Auto">
+                        <Image Source="{Binding Logo}" IsVisible="{Binding HasLogo}" Aspect="AspectFit" Margin="12" />
+                        <Label Text="{Binding Initial}" IsVisible="{Binding NoLogo}" FontSize="36" FontAttributes="Bold"
+                               HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource TextMuted}" />
+                        <Label Grid.Row="1" Text="{Binding Name}" MaxLines="2" LineBreakMode="TailTruncation" Margin="10,0,10,10" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

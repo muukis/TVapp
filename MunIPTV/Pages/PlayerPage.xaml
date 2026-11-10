@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MunIPTV.Pages.PlayerPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="Black">
+    <Grid>
+        <toolkit:MediaElement x:Name="Video"
+                              ShouldAutoPlay="True"
+                              ShouldShowPlaybackControls="False"
+                              Aspect="AspectFit"
+                              StateChanged="OnStateChanged"
+                              MediaFailed="OnMediaFailed" />
+
+        <ActivityIndicator x:Name="Spinner" IsRunning="True" Color="White" VerticalOptions="Center" HorizontalOptions="Center" />
+
+        <!-- Transparent layer: tap anywhere to show/hide the controls. -->
+        <Grid x:Name="Overlay" BackgroundColor="#01000000">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Grid VerticalOptions="Start" Padding="16,32,16,16" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#CC000000" Offset="0" />
+                        <GradientStop Color="#00000000" Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <VerticalStackLayout>
+                    <Label x:Name="NameLabel" FontSize="20" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                    <Label x:Name="GroupLabel" TextColor="#CCFFFFFF" />
+                </VerticalStackLayout>
+                <Button x:Name="FavoriteButton" Grid.Column="1" Text="☆ Favorite" Clicked="OnFavorite" />
+            </Grid>
+
+            <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center" Spacing="16" Padding="0,0,0,32">
+                <Button Text="⏮ Prev" Clicked="OnPrev" />
+                <Button x:Name="PlayPauseButton" Text="⏸ Pause" Clicked="OnPlayPause" />
+                <Button Text="Next ⏭" Clicked="OnNext" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

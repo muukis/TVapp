@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="MunIPTV.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:MunIPTV.Pages"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.BackgroundColor="{StaticResource Background}"
+       Shell.ForegroundColor="{StaticResource TextPrimary}"
+       Shell.TitleColor="{StaticResource TextPrimary}"
+       Shell.TabBarBackgroundColor="{StaticResource Surface}"
+       Shell.TabBarForegroundColor="{StaticResource Accent}"
+       Shell.TabBarTitleColor="{StaticResource Accent}"
+       Shell.TabBarUnselectedColor="{StaticResource TextMuted}">
+
+    <TabBar>
+        <ShellContent Title="Home" Route="home" ContentTemplate="{DataTemplate pages:HomePage}" />
+        <ShellContent Title="Categories" Route="categories" ContentTemplate="{DataTemplate pages:CategoriesPage}" />
+        <ShellContent Title="Support" Route="support" ContentTemplate="{DataTemplate pages:SupportPage}" />
+        <ShellContent Title="Settings" Route="settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
+    </TabBar>
+</Shell>

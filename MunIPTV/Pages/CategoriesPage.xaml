@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MunIPTV.Pages.CategoriesPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MunIPTV.Models"
+             Title="Categories">
+    <CollectionView x:Name="List" IsGrouped="True" SelectionMode="Single" SelectionChanged="OnSelected">
+        <CollectionView.EmptyView>
+            <Label Margin="16" TextColor="{StaticResource TextMuted}"
+                   Text="No channels yet — activate a playlist in Settings" />
+        </CollectionView.EmptyView>
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate x:DataType="models:CategoryGroup">
+                <Label Text="{Binding PlaylistName}" FontSize="14" FontAttributes="Bold"
+                       TextColor="{StaticResource Accent}" Margin="16,16,16,4" />
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Category">
+                <Grid ColumnDefinitions="44,*,Auto" Padding="16,10" ColumnSpacing="12">
+                    <Border BackgroundColor="{StaticResource SurfaceHigh}" StrokeThickness="0" WidthRequest="40" HeightRequest="40">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                        <Label Text="{Binding Initial}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" FontSize="16" LineBreakMode="TailTruncation" />
+                    <Label Grid.Column="2" Text="{Binding Count}" VerticalOptions="Center" TextColor="{StaticResource TextMuted}" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

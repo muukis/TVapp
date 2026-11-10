@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MunIPTV.Pages.SettingsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:MunIPTV.Pages"
+             Title="Playlists">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Label Text="Switch a playlist on or off — several can be active at once." Margin="16,12"
+               TextColor="{StaticResource TextMuted}" />
+
+        <CollectionView x:Name="List" Grid.Row="1" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="pages:PlaylistRow">
+                    <Border Margin="12,4" Padding="12" BackgroundColor="{StaticResource Surface}" StrokeThickness="0">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Playlist.Name}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding Playlist.Url}" FontSize="12" TextColor="{StaticResource TextMuted}" LineBreakMode="MiddleTruncation" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding IsActive, Mode=OneWay}" Toggled="OnToggled"
+                                    OnColor="{StaticResource Accent}" VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8">
+                                <Button Text="Edit" Clicked="OnEdit" HeightRequest="40" />
+                                <Button Text="Delete" Clicked="OnDelete" HeightRequest="40" TextColor="{StaticResource Danger}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="2" Padding="12" Spacing="8">
+            <Button Text="+ Add New Playlist" Clicked="OnAdd" BackgroundColor="{StaticResource Accent}" />
+            <Button x:Name="AddIptvOrgButton" Text="+ Add IPTV-ORG Open Channels" Clicked="OnAddIptvOrg" />
+        </VerticalStackLayout>
+
+        <ActivityIndicator x:Name="Busy" Grid.Row="1" IsRunning="False" IsVisible="False"
+                           Color="{StaticResource Accent}" VerticalOptions="Center" HorizontalOptions="Center" />
+    </Grid>
+</ContentPage>
